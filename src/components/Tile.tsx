@@ -7,16 +7,10 @@ interface TileProps {
 }
 
 const Tile: React.FC<TileProps> = ({ value }) => {
-  const tileClass = value != null && !isNaN(value) ? `tile tile-${value}` : 'tile tile-empty';
+  const tileClass =
+    value != null && !isNaN(value) ? `tile tile-${value}` : 'tile tile-empty';
 
-
-  return (
-    <div className={tileClass}>
-      {value !== null ? value : ''}
-    </div>
-  );
+  return <div className={tileClass}>{value !== null ? value : ''}</div>;
 };
 
 export default Tile;
-
-
