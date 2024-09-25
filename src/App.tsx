@@ -1,42 +1,70 @@
 import './App.css';
 
-import { useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
-import viteLogo from '/vite.svg';
+import Board from './components/Board';
+import type { Direction } from './gameLogic';
+import { useGame } from './hooks/useGame';
 
-import reactLogo from './assets/react.svg';
+const App: React.FC = () => {
+  const { board, score, move, initializeBoard, checkGameOver, checkWin } =
+    useGame();
 
-function App() {
-  const [count, setCount] = useState(0);
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      const directions: Record<string, Direction> = {
+        ArrowUp: 'up',
+        ArrowDown: 'down',
+        ArrowLeft: 'left',
+        ArrowRight: 'right',
+      };
+
+      const direction = directions[event.key];
+      if (direction !== undefined) {
+        const moved = move(direction);
+        if (moved) {
+          if (checkWin()) {
+            alert('You win!');
+            initializeBoard();
+          }
+        }
+
+        if (checkGameOver()) {
+          alert('Game Over!');
+          initializeBoard();
+        }
+      }
+    },
+    [move, checkWin, checkGameOver, initializeBoard],
+  );
+
+  useEffect(() => {
+    initializeBoard();
+  }, [initializeBoard]);
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
+  const handleRestartClick = () => {
+    initializeBoard();
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button
-          onClick={() => {
-            setCount(count + 1);
-          }}
-        >
-          count is {count}
+    <div className="app">
+      <h1>2048 Game</h1>
+      <div className="game-info">
+        <div className="score">Score: {score}</div>
+        <button className="restart-button" onClick={handleRestartClick}>
+          Restart Game
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <Board board={board} />
+    </div>
   );
-}
+};
 
 export default App;

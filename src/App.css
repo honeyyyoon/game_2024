@@ -1,42 +1,108 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #faf8ef;
+}
+
+.app {
   text-align: center;
+  width: 100%;
+  max-width: 500px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+h1 {
+  font-size: 48px;
+  color: #776e65;
+  margin-bottom: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.score {
+  background: #bbada0;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 3px;
+  color: white;
 }
 
-.card {
-  padding: 2em;
+.restart-button {
+  background: #8f7a66;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
-.read-the-docs {
-  color: #888;
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  background-color: #bbada0;
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.tile {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.tile-empty {
+  background-color: #cdc1b4;
+}
+
+.tile-2 {
+  background-color: #eee4da;
+  color: #776e65;
+}
+
+.tile-4 {
+  background-color: #ede0c8;
+  color: #776e65;
+}
+
+.tile-8 {
+  background-color: #f2b179;
+  color: #f9f6f2;
+}
+
+.tile-16 {
+  background-color: #f59563;
+  color: #f9f6f2;
+}
+
+.tile-32 {
+  background-color: #f67c5f;
+  color: #f9f6f2;
+}
+
+.tile-64 {
+  background-color: #f65e3b;
+  color: #f9f6f2;
+}
+
+.tile-128 {
+  background-color: #edcf72;
+  color: #f9f6f2;
+  font-size: 32px;
 }
